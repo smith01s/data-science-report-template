@@ -406,6 +406,7 @@ $endif$
 $if(colorlinks)$
 $else$
 \usepackage[dvipsnames,svgnames*,x11names*,table]{xcolor}
+\usepackage{eso-pic}
 $endif$
 
 %
@@ -622,9 +623,11 @@ $endif$
 $if(titlepage)$
 \begin{titlepage}
 \newgeometry{left=6cm}
+
 $if(titlepage-color)$
 \definecolor{titlepage-color}{HTML}{$titlepage-color$}
-\newpagecolor{titlepage-color}\afterpage{\restorepagecolor}
+\AddToShipoutPictureBG*{\AtPageLowerLeft{%
+  \color{titlepage-color!90}\rule{.25\paperwidth}{\paperheight}}}
 $endif$
 \newcommand{\colorRule}[3][black]{\textcolor[HTML]{#1}{\rule{#2}{#3}}}
 \begin{flushleft}
