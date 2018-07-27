@@ -6,9 +6,9 @@ date: 9th October 2017
 toc: true
 titlegraphic: figures/logo.png
 titlepage: true
-titlepage-color: b7c75a
-titlepage-text-color: ffffff
-titlepage-rule-color: ffffff
+titlepage-color: B7C75A
+titlepage-text-color: FFFFFF
+titlepage-rule-color: FFFFFF
 titlepage-rule-height: 1
 ---
 
