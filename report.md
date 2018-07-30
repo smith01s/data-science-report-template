@@ -7,8 +7,6 @@ toc: true
 titlegraphic: figures/logo.png
 titlepage: true
 titlepage-color: B7C75A
-titlepage-text-color: FFFFFF
-titlepage-rule-color: FFFFFF
 titlepage-rule-height: 1
 ---
 
