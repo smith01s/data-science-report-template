@@ -485,7 +485,7 @@ $endif$
 %
 % heading font
 %
-\newcommand*{\heading}{\fontfamily{\sfdefault}\selectfont}
+\newcommand*{\heading}{\fontfamily{\rmdefault}\selectfont}
 
 %
 % heading color
@@ -493,7 +493,7 @@ $endif$
 \usepackage{relsize}
 \usepackage{sectsty}
 \definecolor{almostblack}{RGB}{40,40,40}
-\allsectionsfont{\sffamily\color{almostblack}}
+\allsectionsfont{\rmfamily\color{almostblack}}
 
 %
 % variables for title and author
@@ -597,16 +597,17 @@ $endif$
 %
 % header and footer
 %
+\usepackage{lastpage}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
 \lhead{$title$}
-\chead{}
-\rhead{$date$}
+\chead{\footnotesize{$date$}}
+\rhead{$if(organisation)$$organisation$$endif$}
 \lfoot{$for(author)$$author$$sep$, $endfor$}
-\cfoot{}
-\rfoot{\thepage}
+\cfoot{\footnotesize{\textbf{$if(confidentiality)$$confidentiality$$endif$}}}
+\rfoot{Page \thepage{} of \pageref{LastPage}}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
@@ -627,15 +628,10 @@ $if(titlepage)$
 $if(titlepage-color)$
 \definecolor{titlepage-color}{HTML}{$titlepage-color$}
 \AddToShipoutPictureBG*{\AtPageLowerLeft{%
-  \color{titlepage-color!90}\rule{.25\paperwidth}{\paperheight}}}
+  \color{titlepage-color!90}\rule{.1\paperwidth}{\paperheight}}}
 $endif$
 \newcommand{\colorRule}[3][black]{\textcolor[HTML]{#1}{\rule{#2}{#3}}}
 \begin{flushleft}
-\noindent
-\\[-1em]
-\color[HTML]{$if(titlepage-text-color)$$titlepage-text-color$$else$5F5F5F$endif$}
-\makebox[0pt][l]{\colorRule[$if(titlepage-rule-color)$$titlepage-rule-color$$else$435488$endif$]{1.3\textwidth}{$if(titlepage-rule-height)$$titlepage-rule-height$$else$4$endif$pt}}
-\par
 \noindent
 
 { \setstretch{1.4}
@@ -648,18 +644,46 @@ $if(titlegraphic)$
 $endif$
 
 \vfill
-\noindent {\huge \textbf{\textsf{$title$}}}
+
+\color[HTML]{$if(titlepage-text-color)$$titlepage-text-color$$else$5F5F5F$endif$}
+\makebox[0pt][l]{\colorRule[$if(titlepage-rule-color)$$titlepage-rule-color$$else$435488$endif$]{1.3\textwidth}{$if(titlepage-rule-height)$$titlepage-rule-height$$else$4$endif$pt}}
+\par
+\noindent
+\vspace{1em}
+
+\noindent {\huge \textbf{$title$}}
 $if(subtitle)$
 \vskip 1em
-{\Large \textsf{$subtitle$}}
+{\Large $subtitle$}
 $endif$
-\vskip 2em
+\vskip 1em
 \noindent
-{\Large \textsf{\textsc{$for(author)$$author$$sep$, $endfor$}}
+
+\vspace{1em}
+\color[HTML]{$if(titlepage-text-color)$$titlepage-text-color$$else$5F5F5F$endif$}
+\makebox[0pt][l]{\colorRule[$if(titlepage-rule-color)$$titlepage-rule-color$$else$435488$endif$]{1.3\textwidth}{$if(titlepage-rule-height)$$titlepage-rule-height$$else$4$endif$pt}}
+\par
+\noindent
 \vfill
+
+{
+\begin{table}[H]
+\centering
+\begin{tabular}{l | r}
+    \textsc{Prepared by} & $for(author)$$author$$sep$, $endfor$ \\
+    \textsc{Approved by} & $for(approver)$$approver$$sep$, $endfor$ \\
+    \textsc{Document reference} & $if(reference)$$reference$$endif$ \\
+    \textsc{Issue number} & $if(issuenumber)$$issuenumber$$endif$ \\
+    \textsc{Date} & $date$
+\end{tabular}
+\end{table}
 }
 
-\textsf{$date$}}
+%{\Large \textsf{\textsc{$for(author)$$author$$sep$, $endfor$}}
+%\vfill
+%}
+%\textsf{$date$}}
+}
 \end{flushleft}
 \end{titlepage}
 \restoregeometry
