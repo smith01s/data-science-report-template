@@ -713,6 +713,7 @@ $if(beamer)$
 \begin{frame}
 \tableofcontents[hideallsubsections]
 \end{frame}
+\clearpage
 $else$
 {
 $if(colorlinks)$
@@ -725,9 +726,11 @@ $endif$
 $endif$
 $if(lot)$
 \listoftables
+\clearpage
 $endif$
 $if(lof)$
 \listoffigures
+\clearpage
 $endif$
 $body$
 
